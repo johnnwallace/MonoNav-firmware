@@ -37,7 +37,7 @@ const DeckDriver wifi_driver = {
   .name = "wifiDeck",
 
 
-  .usedGpio = DECK_USING_IO_1,
+  .usedGpio = DECK_USING_IO_1 | DECK_USING_UART1,
 
   .init = wifiInit,
   .test = wifiTest,
