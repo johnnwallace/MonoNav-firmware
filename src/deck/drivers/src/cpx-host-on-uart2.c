@@ -31,6 +31,9 @@
 
 #include <stdint.h>
 
+#include "FreeRTOS.h"
+#include "task.h"
+
 #include "deck.h"
 #include "param.h"
 
@@ -46,10 +49,18 @@ static void cpxOverUart2Init(DeckInfo *info)
   if (isInit)
     return;
 
+  // Pull reset for ESP32
+  pinMode(DECK_GPIO_IO1, OUTPUT);
+  digitalWrite(DECK_GPIO_IO1, LOW);
+
   cpxUARTTransportInit();
   cpxInternalRouterInit();
   cpxExternalRouterInit();
   cpxInit();
+
+  // Release reset for ESP32
+  digitalWrite(DECK_GPIO_IO1, HIGH);
+  pinMode(DECK_GPIO_IO1, INPUT_PULLUP);
 
   isInit = true;
 }
