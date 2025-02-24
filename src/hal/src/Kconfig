@@ -39,7 +39,7 @@ config CPX_UART2_BAUDRATE
   int "CPX UART2 baudrate"
   depends on ENABLE_CPX_ON_UART2
   range 9600 2000000
-  default 576000
+  default 57600
   help
       Set the baudrate that will be used for CPX on UART2
 

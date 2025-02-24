@@ -88,6 +88,7 @@ static void splitAndSend(const CPXRoutablePacket_t* rxp, RouteContext_t* context
 
 static void route(Receiver_t receive, CPXRoutablePacket_t* rxp, RouteContext_t* context, const char* routerName) {
   while(1) {
+    DEBUG_PRINT("Routing\n");
     receive(rxp);
     // this should never fail, as it should be checked when the packet is received
     // however, double checking doesn't harm
@@ -117,6 +118,7 @@ static void route(Receiver_t receive, CPXRoutablePacket_t* rxp, RouteContext_t* 
 
 static void router_from_uart(void* _param) {
   xEventGroupSetBits(startUpEventGroup, START_UP_UART_ROUTER_RUNNING);
+  DEBUG_PRINT("Starting UART router\n");
   route(cpxUARTTransportReceive, &uartRxBuf, &uart_task_context, "UART2");
 }
 
