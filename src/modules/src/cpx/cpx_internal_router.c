@@ -80,7 +80,7 @@ void cpxInternalRouterRouteIn(const CPXRoutablePacket_t* packet) {
       case CPX_F_APP:
       case CPX_F_TEST:
         xQueueSend(mixedQueue, packet, portMAX_DELAY);
-        break;
+      break;
       case CPX_F_CRTP:
         xQueueSend(crtpQueue, packet, portMAX_DELAY);
         break;

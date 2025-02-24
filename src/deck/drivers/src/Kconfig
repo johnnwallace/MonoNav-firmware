@@ -20,6 +20,12 @@ config DECK_AI
         navigation capabilities. The ESP32 adds WiFi connectivity with
         the possibility to stream images as well as handling control.
 
+config DECK_WIFI
+    bool "Support the Wifi deck"
+    select ENABLE_CPX
+    select ENABLE_CPX_ON_UART2
+    default y
+
 choice
   prompt "WiFi setup at startup"
   depends on DECK_AI

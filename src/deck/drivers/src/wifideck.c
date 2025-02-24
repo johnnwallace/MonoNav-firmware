@@ -15,13 +15,18 @@ void wifiInit(DeckInfo *info)
   if (isInit)
     return;
 
-  // Reset ESP32, camera
+  // Pull reset for ESP32
+  pinMode(DECK_GPIO_IO1, OUTPUT);
+  digitalWrite(DECK_GPIO_IO1, LOW);
 
-  // Initialize cpx
   cpxUARTTransportInit();
-  cpxInternalRouterInit(); // do we need this?
+  cpxInternalRouterInit();
   cpxExternalRouterInit();
   cpxInit();
+
+  // Release reset for ESP32
+  digitalWrite(DECK_GPIO_IO1, HIGH);
+  pinMode(DECK_GPIO_IO1, INPUT_PULLUP);
 
   isInit = true;
 }
@@ -51,6 +56,6 @@ PARAM_GROUP_START(deck)
 /**
  * @brief Nonzero if CRTP over UART has been forced
  */
-PARAM_ADD_CORE(PARAM_UINT8 | PARAM_RONLY, cpxOverUART2, &isInit)
+PARAM_ADD_CORE(PARAM_UINT8 | PARAM_RONLY, wifiDeck, &isInit)
 
 PARAM_GROUP_STOP(deck)

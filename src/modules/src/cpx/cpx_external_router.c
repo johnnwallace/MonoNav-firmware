@@ -105,7 +105,7 @@ static void route(Receiver_t receive, CPXRoutablePacket_t* rxp, RouteContext_t* 
           splitAndSend(rxp, context, cpxUARTTransportSend, CPX_UART_TRANSPORT_MTU - CPX_ROUTING_PACKED_SIZE);
           break;
         case CPX_T_STM32:
-          //DEBUG_PRINT("%s [0x%02X] -> STM32 [0x%02X] (%u)\n", routerName, source, destination, cpxDataLength);
+          DEBUG_PRINT("%s [0x%02X] -> STM32 [0x%02X] (%u)\n", routerName, source, destination, cpxDataLength);
           splitAndSend(rxp, context, cpxInternalRouterRouteIn, CPX_UART_TRANSPORT_MTU - CPX_ROUTING_PACKED_SIZE);
           break;
         default:
